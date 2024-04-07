@@ -1,0 +1,3 @@
+if [ -t bla ]; then
+  echo <%= $bla %>
+fi
