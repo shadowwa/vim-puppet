@@ -11,7 +11,7 @@ au! BufRead,BufNewFile *.pp setfiletype puppet
 " Some epp files may get marked as "mason" type before this script is reached.
 " Vim's own scripts.vim forces the type if it detects a `<%` at the start of
 " the file. All files ending in .epp should be epuppet
-autocmd BufRead,BufNewFile *.epp call DetectOriginalType()
+autocmd! BufRead,BufNewFile *.epp call DetectOriginalType()
 function! DetectOriginalType()
     execute 'doautocmd filetypedetect BufRead ' .fnameescape(expand('<afile>:r'))
     if &filetype !=# '' && !( &filetype ==# 'mason' && expand('<afile>') !~# 'mason')
