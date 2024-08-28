@@ -27,21 +27,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        neovim: [false, true]
+        editor: ["vim", "nvim"]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Vim or Neovim
+      - name: Setup ${{ matrix.editor }}
         uses: rhysd/action-setup-vim@v1
         id: vim
         with:
-          neovim: ${{ matrix.neovim }}
+          neovim: ${{ matrix.editor == 'nvim' }}
       - name: Run Vader unit tests
         run: |
-          if [ "${{ matrix.neovim }}" = "true" ]; then
-            TESTVIM=nvim
-          else
-            TESTVIM=vim
-          fi
+          TESTVIM=${{ matrix.editor }}
           export TESTVIM
           ./test/run-tests.sh
