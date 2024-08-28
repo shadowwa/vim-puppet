@@ -8,7 +8,7 @@ vim.filetype.add({
                 path_wo_epp = path:sub(1,-5)
                 matched = vim.filetype.match({ buf = bufnr, filename = path_wo_epp })
                 if matched ~= nil and matched ~= 'mason' then
-                    vim.b.original_filetype = matched
+                    vim.b.epuppet_subtype = matched
                 end
                 return 'epuppet'
             end,
