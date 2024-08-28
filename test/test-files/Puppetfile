@@ -1,0 +1,3 @@
+forge "https://forgeapi.puppetlabs.com"
+# comment
+mod 'username-modulename', '1.2.3'
