@@ -30,9 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #neovim: [false, true]
-        # When running vader tests in neovim under github's CI, it coredumps
-        neovim: [false]
+        neovim: [false, true]
 
     steps:
       - uses: actions/checkout@v2
