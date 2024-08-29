@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # There exists a vint github action but it can't install the alpha
+      # version. vint has not been moving since 2020 and we need to use the
+      # alpha release since it fixed some things wrt the latest stable release.
       - uses: actions/setup-python@v1
       - name: Install vint
         run: pip install --pre vim-vint
