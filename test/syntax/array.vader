@@ -2,31 +2,31 @@ Given puppet (simple array):
   [ 'one', 'two', 'three' ]
 
 Execute (syntax is good):
-  AssertEqual 'puppetBracket', SyntaxAt(1,1)
-  AssertEqual '', SyntaxAt(1,2)
-  AssertEqual SyntaxAt(1,3), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,4), 'puppetString'
-  AssertEqual SyntaxAt(1,5), 'puppetString'
-  AssertEqual SyntaxAt(1,6), 'puppetString'
-  AssertEqual SyntaxAt(1,7), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,8), 'puppetOperator'
-  AssertEqual '', SyntaxAt(1,9)
-  AssertEqual SyntaxAt(1,10), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,11), 'puppetString'
-  AssertEqual SyntaxAt(1,12), 'puppetString'
-  AssertEqual SyntaxAt(1,13), 'puppetString'
-  AssertEqual SyntaxAt(1,14), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,15), 'puppetOperator'
-  AssertEqual '', SyntaxAt(1,16)
-  AssertEqual SyntaxAt(1,17), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,18), 'puppetString'
-  AssertEqual SyntaxAt(1,19), 'puppetString'
-  AssertEqual SyntaxAt(1,20), 'puppetString'
-  AssertEqual SyntaxAt(1,21), 'puppetString'
-  AssertEqual SyntaxAt(1,22), 'puppetString'
-  AssertEqual SyntaxAt(1,23), 'puppetStringDelimiter'
-  AssertEqual '', SyntaxAt(1,24)
-  AssertEqual 'puppetBracket', SyntaxAt(1,25)
+  AssertEqual 'puppetBracket', SyntaxAt(1,1), '[, col 1. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual '', SyntaxAt(1,2), 'space, col 2. got: "'.SyntaxAt(1,2).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,3), 'quote, col 3. got: "'.SyntaxAt(1,3).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,4), 'o, col 4. got: "'.SyntaxAt(1,4).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,5), 'n, col 5. got: "'.SyntaxAt(1,5).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,6), 'e, col 6. got: "'.SyntaxAt(1,6).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,7), 'quote, col 7. got: "'.SyntaxAt(1,7).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,8), 'comma, col 8. got: "'.SyntaxAt(1,8).'"'
+  AssertEqual '', SyntaxAt(1,9), 'space, col 9. got: "'.SyntaxAt(1,9).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,10), 'quote, col 10. got: "'.SyntaxAt(1,10).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,11), 't, col 11. got: "'.SyntaxAt(1,11).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,12), 'w, col 12. got: "'.SyntaxAt(1,12).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,13), 'o, col 13. got: "'.SyntaxAt(1,13).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,14), 'quote, col 14. got: "'.SyntaxAt(1,14).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,15), 'comma, col 15. got: "'.SyntaxAt(1,15).'"'
+  AssertEqual '', SyntaxAt(1,16), 'space, col 16. got: "'.SyntaxAt(1,16).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,17), 'quote, col 17. got: "'.SyntaxAt(1,17).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,18), 't, col 18. got: "'.SyntaxAt(1,18).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,19), 'h, col 19. got: "'.SyntaxAt(1,19).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,20), 'r, col 20. got: "'.SyntaxAt(1,20).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,21), 'e, col 21. got: "'.SyntaxAt(1,21).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,22), 'e, col 22. got: "'.SyntaxAt(1,22).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,23), 'quote, col 23. got: "'.SyntaxAt(1,23).'"'
+  AssertEqual '', SyntaxAt(1,24), 'space, col 24. got: "'.SyntaxAt(1,24).'"'
+  AssertEqual 'puppetBracket', SyntaxAt(1,25), '], col 25. got: "'.SyntaxAt(1,25).'"'
 
 -------------------------------------------------------------------------------
 
@@ -34,8 +34,8 @@ Given puppet (empty array):
   []
 
 Execute (syntax is good):
-  AssertEqual 'puppetBracket', SyntaxAt(1,1)
-  AssertEqual 'puppetBracket', SyntaxAt(1,2)
+  AssertEqual 'puppetBracket', SyntaxAt(1,1), '[, col 1. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetBracket', SyntaxAt(1,2), '], col 2. got: "'.SyntaxAt(1,2).'"'
 
 -------------------------------------------------------------------------------
 
@@ -43,22 +43,22 @@ Given puppet (nested array):
   ['foo', [ 1,3] ]
 
 Execute (syntax is good):
-  AssertEqual 'puppetBracket', SyntaxAt(1,1)
-  AssertEqual SyntaxAt(1,2), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,3), 'puppetString'
-  AssertEqual SyntaxAt(1,4), 'puppetString'
-  AssertEqual SyntaxAt(1,5), 'puppetString'
-  AssertEqual SyntaxAt(1,6), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,7), 'puppetOperator'
-  AssertEqual '', SyntaxAt(1,8)
-  AssertEqual 'puppetBracket', SyntaxAt(1,9)
-  AssertEqual '', SyntaxAt(1,10)
-  AssertEqual SyntaxAt(1,11), 'puppetInteger'
-  AssertEqual SyntaxAt(1,12), 'puppetOperator'
-  AssertEqual SyntaxAt(1,13), 'puppetInteger'
-  AssertEqual 'puppetBracket', SyntaxAt(1,14)
-  AssertEqual '', SyntaxAt(1,15)
-  AssertEqual 'puppetBracket', SyntaxAt(1,16)
+  AssertEqual 'puppetBracket', SyntaxAt(1,1), '[, col 1. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,2), 'quote, col 2. got: "'.SyntaxAt(1,2).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,3), 'f, col 3. got: "'.SyntaxAt(1,3).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,4), 'o, col 4. got: "'.SyntaxAt(1,4).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,5), 'o, col 5. got: "'.SyntaxAt(1,5).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,6), 'quote, col 6. got: "'.SyntaxAt(1,6).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,7), 'comma, col 7. got: "'.SyntaxAt(1,7).'"'
+  AssertEqual '', SyntaxAt(1,8), 'space, col 8. got: "'.SyntaxAt(1,8).'"'
+  AssertEqual 'puppetBracket', SyntaxAt(1,9), '[, col 9. got: "'.SyntaxAt(1,9).'"'
+  AssertEqual '', SyntaxAt(1,10), 'space, col 10. got: "'.SyntaxAt(1,10).'"'
+  AssertEqual 'puppetInteger', SyntaxAt(1,11), '1, col 11. got: "'.SyntaxAt(1,11).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,12), 'comma, col 12. got: "'.SyntaxAt(1,12).'"'
+  AssertEqual 'puppetInteger', SyntaxAt(1,13), '3, col 13. got: "'.SyntaxAt(1,13).'"'
+  AssertEqual 'puppetBracket', SyntaxAt(1,14), '], col 14. got: "'.SyntaxAt(1,14).'"'
+  AssertEqual '', SyntaxAt(1,15), 'space, col 15. got: "'.SyntaxAt(1,15).'"'
+  AssertEqual 'puppetBracket', SyntaxAt(1,16), '], col 16. got: "'.SyntaxAt(1,16).'"'
 
 -------------------------------------------------------------------------------
 
@@ -66,30 +66,30 @@ Given puppet (array with nested hash):
   [1, 2, { 'foo' => 'bar' },]
 
 Execute (syntax is good):
-  AssertEqual 'puppetBracket', SyntaxAt(1,1)
-  AssertEqual SyntaxAt(1,2), 'puppetInteger'
-  AssertEqual SyntaxAt(1,3), 'puppetOperator'
-  AssertEqual '', SyntaxAt(1,4)
-  AssertEqual SyntaxAt(1,5), 'puppetInteger'
-  AssertEqual SyntaxAt(1,6), 'puppetOperator'
-  AssertEqual '', SyntaxAt(1,7)
-  AssertEqual 'puppetBrace', SyntaxAt(1,8)
-  AssertEqual '', SyntaxAt(1,9)
-  AssertEqual SyntaxAt(1,10), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,11), 'puppetString'
-  AssertEqual SyntaxAt(1,12), 'puppetString'
-  AssertEqual SyntaxAt(1,13), 'puppetString'
-  AssertEqual SyntaxAt(1,14), 'puppetStringDelimiter'
-  AssertEqual '', SyntaxAt(1,15)
-  AssertEqual SyntaxAt(1,16), 'puppetOperator'
-  AssertEqual SyntaxAt(1,17), 'puppetOperator'
-  AssertEqual '', SyntaxAt(1,18)
-  AssertEqual SyntaxAt(1,19), 'puppetStringDelimiter'
-  AssertEqual SyntaxAt(1,20), 'puppetString'
-  AssertEqual SyntaxAt(1,21), 'puppetString'
-  AssertEqual SyntaxAt(1,22), 'puppetString'
-  AssertEqual SyntaxAt(1,23), 'puppetStringDelimiter'
-  AssertEqual '', SyntaxAt(1,24)
-  AssertEqual 'puppetBrace', SyntaxAt(1,25)
-  AssertEqual SyntaxAt(1,26), 'puppetOperator'
-  AssertEqual 'puppetBracket', SyntaxAt(1,27)
+  AssertEqual 'puppetBracket', SyntaxAt(1,1), '[, col 1. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetInteger', SyntaxAt(1,2), '1, col 2. got: "'.SyntaxAt(1,2).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,3), 'comma, col 3. got: "'.SyntaxAt(1,3).'"'
+  AssertEqual '', SyntaxAt(1,4), 'space, col 4. got: "'.SyntaxAt(1,4).'"'
+  AssertEqual 'puppetInteger', SyntaxAt(1,5), '2, col 5. got: "'.SyntaxAt(1,5).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,6), 'comma, col 6. got: "'.SyntaxAt(1,6).'"'
+  AssertEqual '', SyntaxAt(1,7), 'space, col 7. got: "'.SyntaxAt(1,7).'"'
+  AssertEqual 'puppetBrace', SyntaxAt(1,8), '{, col 8. got: "'.SyntaxAt(1,8).'"'
+  AssertEqual '', SyntaxAt(1,9), 'space, col 9. got: "'.SyntaxAt(1,9).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,10), 'quote, col 10. got: "'.SyntaxAt(1,10).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,11), 'f, col 11. got: "'.SyntaxAt(1,11).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,12), 'o, col 12. got: "'.SyntaxAt(1,12).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,13), 'o, col 13. got: "'.SyntaxAt(1,13).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,14), 'quote, col 14. got: "'.SyntaxAt(1,14).'"'
+  AssertEqual '', SyntaxAt(1,15), 'space, col 15. got: "'.SyntaxAt(1,15).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,16), '=, col 16. got: "'.SyntaxAt(1,16).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,17), '>, col 17. got: "'.SyntaxAt(1,17).'"'
+  AssertEqual '', SyntaxAt(1,18), 'space, col 18. got: "'.SyntaxAt(1,18).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,19), 'quote, col 19. got: "'.SyntaxAt(1,19).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,20), 'b, col 20. got: "'.SyntaxAt(1,20).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,21), 'a, col 21. got: "'.SyntaxAt(1,21).'"'
+  AssertEqual 'puppetString', SyntaxAt(1,22), 'r, col 22. got: "'.SyntaxAt(1,22).'"'
+  AssertEqual 'puppetStringDelimiter', SyntaxAt(1,23), 'quote, col 23. got: "'.SyntaxAt(1,23).'"'
+  AssertEqual '', SyntaxAt(1,24), 'space, col 24. got: "'.SyntaxAt(1,24).'"'
+  AssertEqual 'puppetBrace', SyntaxAt(1,25), '}, col 25. got: "'.SyntaxAt(1,25).'"'
+  AssertEqual 'puppetOperator', SyntaxAt(1,26), 'comma, col 26. got: "'.SyntaxAt(1,26).'"'
+  AssertEqual 'puppetBracket', SyntaxAt(1,27), '], col 27. got: "'.SyntaxAt(1,27).'"'
