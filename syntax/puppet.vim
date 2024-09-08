@@ -405,33 +405,28 @@ syn match   puppetComment       "\s*#.*$" contains=puppetTodo,@Spell
 syn region  puppetComment       start="/\*" end="\*/" contains=puppetTodo,@Spell extend
 syn keyword puppetTodo          TODO NOTE FIXME XXX BUG HACK contained
 
-" Define the default highlighting.
-command -nargs=+ HiLink hi def link <args>
-
-HiLink puppetRegexp               puppetConstant
-HiLink puppetStdLibFunction       puppetFunction
-HiLink puppetNoInterpolation      puppetString
-HiLink puppetFunction             Function
-HiLink puppetOperator             Operator
-HiLink puppetString               String
-HiLink puppetWord                 String
-HiLink puppetFloat                Float
-HiLink puppetInteger              Number
-HiLink puppetBoolean              Boolean
-HiLink puppetName                 puppetIdentifier
-HiLink puppetNameBad              Error
-HiLink puppetVariable             puppetIdentifier
-HiLink puppetIdentifier           Identifier
-HiLink puppetType                 Type
-HiLink puppetConditional          Conditional
-HiLink puppetConstant             Constant
-HiLink puppetControl              Statement
-HiLink puppetKeyword              Keyword
-HiLink puppetStringDelimiter      Delimiter
-HiLink puppetDelimiter            Delimiter
-HiLink puppetTodo                 Todo
-HiLink puppetComment              Comment
-
-delcommand HiLink
+hi def link puppetRegexp          puppetConstant
+hi def link puppetStdLibFunction  puppetFunction
+hi def link puppetNoInterpolation puppetString
+hi def link puppetFunction        Function
+hi def link puppetOperator        Operator
+hi def link puppetString          String
+hi def link puppetWord            String
+hi def link puppetFloat           Float
+hi def link puppetInteger         Number
+hi def link puppetBoolean         Boolean
+hi def link puppetName            puppetIdentifier
+hi def link puppetNameBad         Error
+hi def link puppetVariable        puppetIdentifier
+hi def link puppetIdentifier      Identifier
+hi def link puppetType            Type
+hi def link puppetConditional     Conditional
+hi def link puppetConstant        Constant
+hi def link puppetControl         Statement
+hi def link puppetKeyword         Keyword
+hi def link puppetStringDelimiter Delimiter
+hi def link puppetDelimiter       Delimiter
+hi def link puppetTodo            Todo
+hi def link puppetComment         Comment
 
 let b:current_syntax = 'puppet'
