@@ -87,12 +87,14 @@ syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[xX]\x\+\.\x\+
 syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0\o*[89]\d*\>" display
 
 syn match puppetVariable "$\%(::\)\=\w\+\%(::\w\+\)*" display
-syn match puppetName "\%(::\)\=[a-z]\w*\%(::[a-z]\w*\)*" display
-syn match puppetType "\%(::\)\=[A-Z]\w*\%(::[A-Z]\w*\)*" display
-syn match puppetWord "\%(\%(::\)\=\%(_[\w-]*\w\+\)\|\%([a-z]\%(\w*-\)\+\w\+\)\)\+" display
-
+" resource name
+syn match puppetName "\%(\%(::\)\=\|\<\)[a-z]\w*\%(::[a-z]\w*\)*\>" display
+" resource or type reference
+syn match puppetType "\%(\%(::\)\=\|\<\)[A-Z]\w*\%(::[A-Z]\w*\)*\>" display
+" ??
+syn match puppetWord "\%(\%(\%(::\)\=\|\<\)\%(_[\w-]*\w\+\)\|\%([a-z]\%(\w*-\)\+\w\+\)\)\+\>" display
 " bad name containing combinations of segment starting with lower case and segement starting with upper case (or vice versa)
-syn match puppetNameBad "\%(::\)\=\%(\w\+::\)*\%(\%([a-z]\w*::[A-Z]\w*\)\|\%([A-Z]\w*::[a-z]\w*\)\)\%(::\w\+\)*" display
+syn match puppetNameBad "\%(\%(::\)\=\|\<\)\%(\w\+::\)*\%(\%([a-z]\w*::[A-Z]\w*\)\|\%([A-Z]\w*::[a-z]\w*\)\)\%(::\w\+\)*\>" display
 syn cluster puppetNameOrType contains=puppetVariable,puppetName,puppetType,puppetWord,puppetNameBad
 
 syn keyword puppetControl  case in
@@ -520,8 +522,8 @@ syn region puppetString matchgroup=puppetStringDelimiter start="\"" end="\"" ski
 syn region puppetString matchgroup=puppetStringDelimiter start="'" end="'" skip="\\\\\|\\'" contains=puppetQuoteEscape
 
 " Normal Regular Expression {{{1
-syn region puppetRegexp matchgroup=puppetRegexpDelimiter start="\%(\%(^\|\<\%(and\|or\|while\|until\|unless\|if\|elsif\|when\|not\|then\|else\)\|[;\~=!|&(,{[<>?:*+-]\)\s*\)\@<=/" end="/" skip="\\\\\|\\/" contains=@puppetRegexpSpecial
-syn region puppetRegexp matchgroup=puppetRegexpDelimiter start="\%(\h\k*\s\+\)\@<=/[ \t=]\@!" end="/" skip="\\\\\|\\/" contains=@puppetRegexpSpecial
+syn region puppetRegexp matchgroup=puppetRegexpDelimiter start="\%(\%(^\|\<\%(and\|or\|while\|until\|unless\|if\|elsif\|when\|not\|then\|else\)\|[;\~=!|&(,{[<>?:*+-]\)\s*\)\zs/" end="/" skip="\\\\\|\\/" contains=@puppetRegexpSpecial
+syn region puppetRegexp matchgroup=puppetRegexpDelimiter start="\%(\h\k*\s\+\)\zs/[ \t=]\@!" end="/" skip="\\\\\|\\/" contains=@puppetRegexpSpecial
 
 " Here Document {{{1
 syn region puppetHeredocStart matchgroup=puppetStringDelimiter start=+@(\s*\%("[^"]\+"\|\w\+\)\%(/[nrtsuL$\\]*\)\=)+ end=+$+ oneline contains=ALLBUT,@puppetNotTop
