@@ -6,12 +6,14 @@ Given puppet (simple resource with autoformat while writing):
 Do (format resource):
   joforce=>true,
 
-Expect (formated resource):
+Expect puppet (formated resource):
   file { 'foo':
     ensure => present,
     force  => true,
   }
+
 -------------------------------------------------------------------------------
+
 Given puppet (simple resource with gq):
     # Short comment
   file { 'foo':
@@ -22,10 +24,35 @@ Given puppet (simple resource with gq):
 Do (format resource):
   gqG
 
-Expect (formated resource):
+Expect puppet (formated resource):
   # Short comment
   file { 'foo':
     ensure => present,
     force  => true,
   }
+
+-------------------------------------------------------------------------------
+
+Given puppet (comment with code snippet with hashrocket):
+  # @example: Minimal example for puppet-vim issue
+  #   class { 'example1':
+  #     attr => 'short attribute',
+  #   }
+  #
+  # @example2: AlignHashrockets goes nuts
+  #   class { 'example2':
+  #   long_attr 
+
+Do (Add hashrocket in second example):
+  GA=>
+
+Expect puppet (example1 untouched):
+  # @example: Minimal example for puppet-vim issue
+  #   class { 'example1':
+  #     attr => 'short attribute',
+  #   }
+  #
+  # @example2: AlignHashrockets goes nuts
+  #   class { 'example2':
+  #   long_attr =>
 
