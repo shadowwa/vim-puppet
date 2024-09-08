@@ -14,7 +14,7 @@ endif
 let s:cpo_sav = &cpo
 set cpo&vim
 
-syn cluster puppetNotTop contains=@puppetExtendedStringSpecial,@puppetRegexpSpecial,puppetConditional,puppetTodo
+syn cluster puppetNotTop contains=@puppetExtendedStringSpecial,@puppetRegexpSpecial,puppetTodo
 
 syn match puppetSpaceError display excludenl "\s\+$"
 syn match puppetSpaceError display " \+\t\+\%( \|\t\)*\|\t\+ \+\%( \|\t\)*"
