@@ -28,9 +28,9 @@ syn match  puppetOperator "+=\|-=\|==\|!=\|=\~\|!\~\|>=\|<=\|<-\|<\~\|=>\|+>\|->
 " three character operators
 syn match  puppetOperator "<<|\||>>"
 
-syn region puppetBracketOperator matchgroup=puppetDelimiter start="\[\s*" end="\s*]" fold contains=ALLBUT,@puppetNotTop
-syn region puppetBraceOperator matchgroup=puppetDelimiter start="{\s*" end="\s*}" fold contains=ALLBUT,@puppetNotTop
-syn region puppetParenOperator matchgroup=puppetDelimiter start="(\s*" end="\s*)" fold contains=ALLBUT,@puppetNotTop
+syn region puppetBracketBlock transparent matchgroup=puppetBracket start="\[" end="]" fold contains=ALLBUT,@puppetNotTop
+syn region puppetBraceBlock transparent matchgroup=puppetBrace start="{" end="}" fold contains=ALLBUT,@puppetNotTop
+syn region puppetParenBlock transparent matchgroup=puppetParen start="(" end=")" fold contains=ALLBUT,@puppetNotTop
 
 " Expression Substitution and Backslash Notation {{{1
 syn match puppetStringEscape "\\\\\|\\[abefnrstv]\|\\\o\{1,3}\|\\x\x\{1,2}" contained display
@@ -424,7 +424,9 @@ hi def link puppetConstant        Constant
 hi def link puppetControl         Statement
 hi def link puppetKeyword         Keyword
 hi def link puppetStringDelimiter Delimiter
-hi def link puppetDelimiter       Delimiter
+hi def link puppetBracket         Delimiter
+hi def link puppetBrace           Delimiter
+hi def link puppetParen           Delimiter
 hi def link puppetTodo            Todo
 hi def link puppetComment         Comment
 

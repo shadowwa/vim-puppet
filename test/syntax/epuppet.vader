@@ -29,9 +29,9 @@ Execute (puppet syntax must be correct):
   AssertEqual 'puppetVariable', SyntaxOf('$variable')
 -- Again, we're testing multiple times for the same syntaxID. Let's define our
 -- message.
-  AssertEqual 'puppetDelimiter', SyntaxOf('{'), "for { in first puppet block, expected 'puppetDelimiter', got '".SyntaxOf('{')."'"
-  AssertEqual 'puppetDelimiter', SyntaxOf('{', 2), "for { in second puppet block, expected 'puppetDelimiter', got '".SyntaxOf('{', 2)."'"
-  " XXX syntax/puppet.vim's region for puppetDelimiter can't match the opening
-  " bracket, so we're not seeing the right syntax for the closing bracket
-  "AssertEqual 'puppetDelimiter', SyntaxOf('}'), "for } in third puppet block, expected 'puppetDelimiter', got '".SyntaxOf('}')."'"
+  AssertEqual 'puppetBrace', SyntaxOf('{'), 'for { in first puppet block, expected "puppetBrace", got "'.SyntaxOf('{').'"'
+  AssertEqual 'puppetBrace', SyntaxOf('{', 2), 'for { in second puppet block, expected "puppetBrace", got "'.SyntaxOf('{', 2).'"'
+  " XXX syntax/puppet.vim's region for puppetBrace can't match the opening
+  " brace, so we're not seeing the right syntax for the closing brace
+  "AssertEqual 'puppetBrace', SyntaxOf('}'), 'for } in third puppet block, expected "puppetBrace", got "'.SyntaxOf('}').'"'
   AssertEqual 'puppetComment', SyntaxOf('puppet comment')

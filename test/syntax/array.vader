@@ -2,9 +2,9 @@ Given puppet (simple array):
   [ 'one', 'two', 'three' ]
 
 Execute (syntax is good):
-  AssertEqual SyntaxAt(1,1), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,1)
   " TODO: Ideally this should link to a null syntax node.
-  "AssertEqual SyntaxAt(1,2), 'puppetDelimiter'
+  "AssertEqual 'puppetBracket', SyntaxAt(1,2)
   AssertEqual SyntaxAt(1,3), 'puppetStringDelimiter'
   AssertEqual SyntaxAt(1,4), 'puppetString'
   AssertEqual SyntaxAt(1,5), 'puppetString'
@@ -29,8 +29,8 @@ Execute (syntax is good):
   AssertEqual SyntaxAt(1,22), 'puppetString'
   AssertEqual SyntaxAt(1,23), 'puppetStringDelimiter'
   " TODO: Ideally this should link to a null syntax node.
-  "AssertEqual SyntaxAt(1,24), 'puppetDelimiter'
-  AssertEqual SyntaxAt(1,25), 'puppetDelimiter'
+  "AssertEqual 'puppetBracket', SyntaxAt(1,24)
+  AssertEqual 'puppetBracket', SyntaxAt(1,25)
 
 -------------------------------------------------------------------------------
 
@@ -38,8 +38,8 @@ Given puppet (empty array):
   []
 
 Execute (syntax is good):
-  AssertEqual SyntaxAt(1,1), 'puppetDelimiter'
-  AssertEqual SyntaxAt(1,2), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,1)
+  AssertEqual 'puppetBracket', SyntaxAt(1,2)
 
 -------------------------------------------------------------------------------
 
@@ -47,7 +47,7 @@ Given puppet (nested array):
   ['foo', [ 1,3] ]
 
 Execute (syntax is good):
-  AssertEqual SyntaxAt(1,1), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,1)
   AssertEqual SyntaxAt(1,2), 'puppetStringDelimiter'
   AssertEqual SyntaxAt(1,3), 'puppetString'
   AssertEqual SyntaxAt(1,4), 'puppetString'
@@ -56,16 +56,16 @@ Execute (syntax is good):
   AssertEqual SyntaxAt(1,7), 'puppetOperator'
   " TODO: Ideally this should link to a null syntax node.
   "AssertEqual SyntaxAt(1,8), 'puppetBracketOperator'
-  AssertEqual SyntaxAt(1,9), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,9)
   " TODO: Ideally this should link to a null syntax node.
-  "AssertEqual SyntaxAt(1,10), 'puppetDelimiter'
+  "AssertEqual 'puppetBracket', SyntaxAt(1,10)
   AssertEqual SyntaxAt(1,11), 'puppetInteger'
   AssertEqual SyntaxAt(1,12), 'puppetOperator'
   AssertEqual SyntaxAt(1,13), 'puppetInteger'
-  AssertEqual SyntaxAt(1,14), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,14)
   " TODO: Ideally this should link to a null syntax node.
-  "AssertEqual SyntaxAt(1,15), 'puppetDelimiter'
-  AssertEqual SyntaxAt(1,16), 'puppetDelimiter'
+  "AssertEqual 'puppetBracket', SyntaxAt(1,15)
+  AssertEqual 'puppetBracket', SyntaxAt(1,16)
 
 -------------------------------------------------------------------------------
 
@@ -73,7 +73,7 @@ Given puppet (array with nested hash):
   [1, 2, { 'foo' => 'bar' },]
 
 Execute (syntax is good):
-  AssertEqual SyntaxAt(1,1), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,1)
   AssertEqual SyntaxAt(1,2), 'puppetInteger'
   AssertEqual SyntaxAt(1,3), 'puppetOperator'
   " TODO: Ideally this should link to a null syntax node.
@@ -82,9 +82,9 @@ Execute (syntax is good):
   AssertEqual SyntaxAt(1,6), 'puppetOperator'
   " TODO: Ideally this should link to a null syntax node.
   "AssertEqual SyntaxAt(1,7), 'puppetBracketOperator'
-  AssertEqual SyntaxAt(1,8), 'puppetDelimiter'
+  AssertEqual 'puppetBrace', SyntaxAt(1,8)
   " TODO: Ideally this should link to a null syntax node.
-  "AssertEqual SyntaxAt(1,9), 'puppetDelimiter'
+  "AssertEqual 'puppetBrace', SyntaxAt(1,9)
   AssertEqual SyntaxAt(1,10), 'puppetStringDelimiter'
   AssertEqual SyntaxAt(1,11), 'puppetString'
   AssertEqual SyntaxAt(1,12), 'puppetString'
@@ -102,7 +102,7 @@ Execute (syntax is good):
   AssertEqual SyntaxAt(1,22), 'puppetString'
   AssertEqual SyntaxAt(1,23), 'puppetStringDelimiter'
   " TODO: Ideally this should link to a null syntax node.
-  "AssertEqual SyntaxAt(1,24), 'puppetDelimiter'
-  AssertEqual SyntaxAt(1,25), 'puppetDelimiter'
+  "AssertEqual 'puppetBrace', SyntaxAt(1,24)
+  AssertEqual 'puppetBrace', SyntaxAt(1,25)
   AssertEqual SyntaxAt(1,26), 'puppetOperator'
-  AssertEqual SyntaxAt(1,27), 'puppetDelimiter'
+  AssertEqual 'puppetBracket', SyntaxAt(1,27)
