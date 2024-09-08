@@ -489,9 +489,7 @@ syn region  puppetComment       start="/\*" end="\*/" contains=puppetTodo,puppet
 syn keyword puppetTodo          TODO NOTE FIXME XXX BUG HACK contained
 
 hi def link puppetStringDelimiter Delimiter
-hi def link puppetBracket         Delimiter
-hi def link puppetBrace           Delimiter
-hi def link puppetParen           Delimiter
+hi def link puppetRegexpDelimiter Delimiter
 hi def link puppetRegexp          puppetConstant
 hi def link puppetConstant        Constant
 hi def link puppetNoInterpolation puppetString
@@ -501,6 +499,9 @@ hi def link puppetFloat           Float
 hi def link puppetInteger         Number
 hi def link puppetBoolean         Boolean
 hi def link puppetType            Type
+hi def link puppetBracket         Operator
+hi def link puppetBrace           Operator
+hi def link puppetParen           Operator
 hi def link puppetOperator        Operator
 hi def link puppetStructure       Structure
 hi def link puppetName            puppetIdentifier
