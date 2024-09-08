@@ -14,7 +14,7 @@ endif
 let s:cpo_sav = &cpo
 set cpo&vim
 
-syn cluster puppetNotTop contains=@puppetExtendedStringSpecial,@puppetRegexpSpecial,@puppetDeclaration,puppetConditional,puppetExceptional,puppetMethodExceptional,puppetTodo
+syn cluster puppetNotTop contains=@puppetExtendedStringSpecial,@puppetRegexpSpecial,puppetConditional,puppetTodo
 
 syn match puppetSpaceError display excludenl "\s\+$"
 syn match puppetSpaceError display " \+\t"me=e-1
@@ -93,9 +93,10 @@ syn match puppetNameBad "\%(::\)\=\%(\w\+::\)*\%(\%([a-z]\w*::[A-Z]\w*\)\|\%([A-
 syn cluster puppetNameOrType contains=puppetVariable,puppetName,puppetType,puppetWord,puppetNameBad
 
 syn keyword puppetControl  case and or in
-syn keyword puppetKeyword  class define inherits node undef function type attr private
-syn keyword puppetKeyword  application consumes produces site
-syn keyword puppetKeyword  present absent purged latest installed running stopped mounted unmounted role configured file directory link on_failure contained
+syn keyword puppetKeyword  class define inherits node function type attr private
+syn keyword puppetKeyword  application consumes produces site component environment unit
+syn keyword puppetKeyword  present absent purged latest installed running stopped mounted unmounted role configured
+syn keyword puppetKeyword  file directory link on_failure regexp
 syn keyword puppetConstant default undef
 syn keyword puppetConditional if else elsif unless
 syn keyword puppetBoolean  true false
