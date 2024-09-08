@@ -82,6 +82,10 @@ syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[oO]\=\o\+\%(_\o\+\)
 syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[bB][01]\+\%(_[01]\+\)*r\=i\=\>" display
 syn match puppetFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\%(_\d\+\)*\)\.\d\+\%(_\d\+\)*r\=i\=\>" display
 syn match puppetFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\%(_\d\+\)*\)\%(\.\d\+\%(_\d\+\)*\)\=\%([eE][-+]\=\d\+\%(_\d\+\)*\)r\=i\=\>" display
+" order of matches is important. The following need to be placed after the ones above
+syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\%(\|\<0\d\+\)\.\d\+\>" display
+syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[xX]\x\+\.\x\+\>" display
+syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0\o*[89]\d*\>" display
 
 syn match puppetVariable "$\%(::\)\=\w\+\%(::\w\+\)*" display
 syn match puppetName "\%(::\)\=[a-z]\w*\%(::[a-z]\w*\)*" display
@@ -431,6 +435,7 @@ hi def link puppetTodo            Todo
 hi def link puppetComment         Comment
 
 if g:puppet_display_errors ==# v:true
+  hi def link puppetInvalidNumber   Error
   hi def link puppetNameBad         Error
   hi def link puppetSpaceError      Error
 endif

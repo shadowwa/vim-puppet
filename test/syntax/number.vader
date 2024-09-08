@@ -134,3 +134,17 @@ Execute (syntax is good):
   AssertEqual SyntaxAt(6,1), 'puppetFloat'
   AssertEqual SyntaxAt(6,2), 'puppetFloat'
   AssertEqual SyntaxAt(6,3), 'puppetFloat'
+
+-------------------------------------------------------------------------------
+
+Given puppet (malformed numbers):
+  0x3.4
+  07.2
+  01239
+  .42
+
+Execute (syntax shows error):
+  AssertEqual 'puppetInvalidNumber', SyntaxAt(1,1), 'hexadecimal with dot. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetInvalidNumber', SyntaxAt(2,1), 'octal with dot. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetInvalidNumber', SyntaxAt(3,1), 'octal with digits out of range. got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetInvalidNumber', SyntaxAt(4,1), 'leading dot. got: "'.SyntaxAt(1,1).'"'
