@@ -100,7 +100,7 @@ syn keyword puppetStructure node class define plan
 syn keyword puppetKeyword  inherits function type attr private
 syn keyword puppetKeyword  application consumes produces site component environment unit
 syn keyword puppetKeyword  present absent purged latest installed running stopped mounted unmounted role configured
-syn keyword puppetKeyword  file directory link on_failure regexp
+syn keyword puppetKeyword  directory link on_failure regexp
 syn keyword puppetConstant default undef
 syn keyword puppetConditional if else elsif unless and or
 syn keyword puppetBoolean  true false
