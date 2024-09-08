@@ -11,6 +11,9 @@ Provides
 
 * Formatting based on the latest Puppetlabs Style Guide
 * Syntax highlighting compatible with puppet 4.x
+  * by default, highlights errors: mixing spaces and tabs and bad names. If you
+    don't want this highlighting, add `let g:puppet_display_errors = v:false`
+    (or really any value that's not `v:true`) to your vimrc.
 * Automatic => alignment
   * If you don't like that, add `let g:puppet_align_hashes = 0` to your vimrc.
 * Ctags support

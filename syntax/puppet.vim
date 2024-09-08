@@ -17,7 +17,7 @@ set cpo&vim
 syn cluster puppetNotTop contains=@puppetExtendedStringSpecial,@puppetRegexpSpecial,puppetConditional,puppetTodo
 
 syn match puppetSpaceError display excludenl "\s\+$"
-syn match puppetSpaceError display " \+\t"me=e-1
+syn match puppetSpaceError display " \+\t\+\%( \|\t\)*\|\t\+ \+\%( \|\t\)*"
 
 " one character operators
 syn match  puppetOperator "[=><+/*%!.|@:,;?~-]"
@@ -401,8 +401,8 @@ syn region puppetString start=+@(\s*"\z([^"]\+\)"\%(/[nrtsuL$\\]*\)\=+hs=s+2  ma
 syn region puppetString start=+@(\s*\z(\w\+\)\%(/[nrtsuL$\\]*\)\=+hs=s+2  matchgroup=puppetStringDelimiter end=+^\s*|\=\s*-\=\s*\zs\z1$+ contains=puppetHeredocStart		    keepend
 
 " comments last overriding everything else
-syn match   puppetComment       "\s*#.*$" contains=puppetTodo,@Spell
-syn region  puppetComment       start="/\*" end="\*/" contains=puppetTodo,@Spell extend
+syn match   puppetComment       "\s*#.*$" contains=puppetTodo,puppetSpaceError,@Spell
+syn region  puppetComment       start="/\*" end="\*/" contains=puppetTodo,puppetSpaceError,@Spell extend
 syn keyword puppetTodo          TODO NOTE FIXME XXX BUG HACK contained
 
 hi def link puppetRegexp          puppetConstant
@@ -416,7 +416,6 @@ hi def link puppetFloat           Float
 hi def link puppetInteger         Number
 hi def link puppetBoolean         Boolean
 hi def link puppetName            puppetIdentifier
-hi def link puppetNameBad         Error
 hi def link puppetVariable        puppetIdentifier
 hi def link puppetIdentifier      Identifier
 hi def link puppetType            Type
@@ -428,5 +427,10 @@ hi def link puppetStringDelimiter Delimiter
 hi def link puppetDelimiter       Delimiter
 hi def link puppetTodo            Todo
 hi def link puppetComment         Comment
+
+if g:puppet_display_errors ==# v:true
+  hi def link puppetNameBad         Error
+  hi def link puppetSpaceError      Error
+endif
 
 let b:current_syntax = 'puppet'
