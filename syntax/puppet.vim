@@ -37,14 +37,14 @@ syn match puppetStringEscape "\\\\\|\\[abefnrstv]\|\\\o\{1,3}\|\\x\x\{1,2}" cont
 syn match puppetStringEscape "\%(\\M-\\C-\|\\C-\\M-\|\\M-\\c\|\\c\\M-\|\\c\|\\C-\|\\M-\)\%(\\\o\{1,3}\|\\x\x\{1,2}\|\\\=\S\)" contained display
 syn match puppetQuoteEscape  "\\[\\']" contained display
 
-syn region puppetInterpolation   matchgroup=puppetInterpolationDelimiter start="${" end="}" contained contains=ALLBUT,@puppetNotTop
-syn match  puppetInterpolation   "$\%(::\)\?\w\+"                        display contained contains=puppetInterpolationDelimiter,puppetVariable
+syn region puppetNoInterpolation contained transparent start="\\${" end="}"
+syn match  puppetNoInterpolation display contained "\\${"
+syn match  puppetNoInterpolation display contained "\\$\w\+"
+syn region puppetInterpolation transparent matchgroup=puppetInterpolationDelimiter start="${" end="}" contained contains=ALLBUT,@puppetNotTop
+syn match  puppetInterpolation "$\%(::\)\?\w\+"                        display contained contains=puppetInterpolationDelimiter,puppetVariable
+syn match  puppetInterpolation "$\$\%(-\w\|\W\)"              display contained contains=puppetInterpolationDelimiter,puppetVariable,puppetInvalidVariable
 syn match  puppetInterpolationDelimiter "$\ze\$\w\+"            display contained
-syn match  puppetInterpolation   "$\$\%(-\w\|\W\)"              display contained contains=puppetInterpolationDelimiter,puppetVariable,puppetInvalidVariable
 syn match  puppetInterpolationDelimiter "$\ze\$\%(-\w\|\W\)"    display contained
-syn region puppetNoInterpolation start="\\${" end="}"	        contained
-syn match  puppetNoInterpolation "\\${"		                    display contained
-syn match  puppetNoInterpolation "\\$\w\+"                      display contained
 
 syn match puppetDelimiterEscape	"\\[(<{\[)>}\]]" transparent display contained contains=NONE
 
