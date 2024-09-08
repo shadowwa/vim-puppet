@@ -6,21 +6,10 @@ Execute (epuppet test_with_leading_tag):
   edit test/test-files/test_with_leading_tag.epp
   AssertEqual &filetype, 'epuppet'
 
-# If/when https://github.com/junegunn/vader.vim/pull/201 gets merged into
-# vader.vim, we can use the following to skip the test on vim -- until we
-# actually fix the filetype detection.
-# Until SkipIf gets merged, though we need to keep the test commented out to
-# avoid useless CI failure unrelated to other changes
-#Given:
-#
-#SkipIf (ftdetect/puppet.vim is unable to match filetype with content header):
-#  if !has('nvim')
-#    VaderSkip
-#  endif
-#Execute (epuppet perl with shebang):
-#  edit test/test-files/test_perl_with_shebang.epp
-#  AssertEqual &filetype, 'epuppet'
-#  AssertEqual b:epuppet_subtype, 'perl'
+Execute (TODO: epuppet perl with shebang):
+  edit test/test-files/test_perl_with_shebang.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'perl'
 
 # We don't need to parse the shebang for shell since sh is the default subtype
 Execute (epuppet default to shell):
@@ -38,14 +27,7 @@ Execute (epuppet php with extension):
   AssertEqual &filetype, 'epuppet'
   AssertEqual b:epuppet_subtype, 'php'
 
-# Same as above
-#Given:
-#
-#SkipIf (ftdetect/puppet.vim is unable match filetype by path):
-#  if !has('nvim')
-#    VaderSkip
-#  endif
-#Execute (epuppet apache conf with path and extension):
-#  edit test/test-files/etc/apache2/test.conf.epp
-#  AssertEqual &filetype, 'epuppet'
-#  AssertEqual b:epuppet_subtype, 'apache'
+Execute (TODO: epuppet apache conf with path and extension):
+  edit test/test-files/etc/apache2/test.conf.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'apache'
