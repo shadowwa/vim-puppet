@@ -76,12 +76,11 @@ syn cluster puppetStringSpecial	      contains=puppetInterpolation,puppetNoInter
 syn cluster puppetExtendedStringSpecial contains=@puppetStringSpecial,puppetNestedParentheses,puppetNestedCurlyBraces,puppetNestedAngleBrackets,puppetNestedSquareBrackets
 syn cluster puppetRegexpSpecial	      contains=puppetRegexpSpecial,puppetRegexpEscape,puppetRegexpBrackets,puppetRegexpCharClass,puppetRegexpDot,puppetRegexpQuantifier,puppetRegexpAnchor,puppetRegexpParens,puppetRegexpComment
 
-syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[xX]\x\+\%(_\x\+\)*r\=i\=\>" display
-syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0[dD]\)\=\%(0\|[1-9]\d*\%(_\d\+\)*\)r\=i\=\>" display
-syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[oO]\=\o\+\%(_\o\+\)*r\=i\=\>" display
-syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[bB][01]\+\%(_[01]\+\)*r\=i\=\>" display
-syn match puppetFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\%(_\d\+\)*\)\.\d\+\%(_\d\+\)*r\=i\=\>" display
-syn match puppetFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\%(_\d\+\)*\)\%(\.\d\+\%(_\d\+\)*\)\=\%([eE][-+]\=\d\+\%(_\d\+\)*\)r\=i\=\>" display
+syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[xX]\x\+r\=i\=\>" display
+syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\)r\=i\=\>" display
+syn match puppetInteger	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0\o\+r\=i\=\>" display
+syn match puppetFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\)\.\d\+r\=i\=\>" display
+syn match puppetFloat	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<\%(0\|[1-9]\d*\)\%(\.\d\+\)\=[eE][-+]\=\d\+r\=i\=\>" display
 " order of matches is important. The following need to be placed after the ones above
 syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\%(\|\<0\d\+\)\.\d\+\>" display
 syn match puppetInvalidNumber	"\%(\%(\w\|[]})\"']\s*\)\@<!-\)\=\<0[xX]\x\+\.\x\+\>" display
