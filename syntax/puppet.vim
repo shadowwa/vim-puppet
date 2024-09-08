@@ -95,14 +95,14 @@ syn match puppetWord "\%(\%(::\)\=\%(_[\w-]*\w\+\)\|\%([a-z]\%(\w*-\)\+\w\+\)\)\
 syn match puppetNameBad "\%(::\)\=\%(\w\+::\)*\%(\%([a-z]\w*::[A-Z]\w*\)\|\%([A-Z]\w*::[a-z]\w*\)\)\%(::\w\+\)*" display
 syn cluster puppetNameOrType contains=puppetVariable,puppetName,puppetType,puppetWord,puppetNameBad
 
-syn keyword puppetControl  case and or in
+syn keyword puppetControl  case in
 syn keyword puppetStructure node class define plan
 syn keyword puppetKeyword  inherits function type attr private
 syn keyword puppetKeyword  application consumes produces site component environment unit
 syn keyword puppetKeyword  present absent purged latest installed running stopped mounted unmounted role configured
 syn keyword puppetKeyword  file directory link on_failure regexp
 syn keyword puppetConstant default undef
-syn keyword puppetConditional if else elsif unless
+syn keyword puppetConditional if else elsif unless and or
 syn keyword puppetBoolean  true false
 
 " Core functions that include more code
@@ -110,60 +110,106 @@ syn match puppetIncludeFunction "\<contain\>"
 syn match puppetIncludeFunction "\<create_resources\>"
 syn match puppetIncludeFunction "\<include\>"
 syn match puppetIncludeFunction "\<hiera_include\>"
+syn match puppetIncludeFunction "\<require\>"
 
 " Core functions
-syn match puppetFunction "\<alert\>"
+syn match puppetConditional "\<then\>"
+syn match puppetConditional "\<lest\>"
+syn match puppetRepeat "\<break\>"
+syn match puppetRepeat "\<each\>"
+syn match puppetRepeat "\<map\>"
+syn match puppetRepeat "\<next\>"
+syn match puppetRepeat "\<return\>"
+syn match puppetRepeat "\<reverse_each\>"
+syn match puppetDebug "\<alert\>"
+syn match puppetDebug "\<crit\>"
+syn match puppetDebug "\<debug\>"
+syn match puppetDebug "\<emerg\>"
+syn match puppetDebug "\<err\>"
+syn match puppetDebug "\<fail\>"
+syn match puppetDebug "\<info\>"
+syn match puppetDebug "\<notice\>"
+syn match puppetDebug "\<warning\>"
+syn match puppetFunction "\<abs\>"
+syn match puppetFunction "\<all\>"
+syn match puppetFunction "\<annotate\>"
+syn match puppetFunction "\<any\>"
 syn match puppetFunction "\<assert_type\>"
 syn match puppetFunction "\<binary_file\>"
-syn match puppetFunction "\<break\>"
-syn match puppetFunction "\<crit\>"
-syn match puppetFunction "\<debug\>"
+syn match puppetFunction "\<call\>"
+syn match puppetFunction "\<camelcase\>"
+syn match puppetFunction "\<capitalize\>"
+syn match puppetFunction "\<ceiling\>"
+syn match puppetFunction "\<chomp\>"
+syn match puppetFunction "\<chop\>"
+syn match puppetFunction "\<compare\>"
+syn match puppetFunction "\<convert_to\>"
 syn match puppetFunction "\<defined\>"
 syn match puppetFunction "\<dig\>"
-syn match puppetFunction "\<each\>"
-syn match puppetFunction "\<emerg\>"
+syn match puppetFunction "\<digest\>"
+syn match puppetFunction "\<downcase\>"
+syn match puppetFunction "\<empty\>"
 syn match puppetFunction "\<epp\>"
-syn match puppetFunction "\<err\>"
-syn match puppetFunction "\<fail\>"
+syn match puppetFunction "\<eyaml_lookup_key\>"
 syn match puppetFunction "\<file\>"
 syn match puppetFunction "\<filter\>"
 syn match puppetFunction "\<find_file\>"
+syn match puppetFunction "\<find_template\>"
+syn match puppetFunction "\<flatten\>"
+syn match puppetFunction "\<floor\>"
 syn match puppetFunction "\<fqdn_rand\>"
+syn match puppetFunction "\<generate\>"
+syn match puppetFunction "\<get\>"
+syn match puppetFunction "\<getvar\>"
+syn match puppetFunction "\<group_by\>"
 syn match puppetFunction "\<hiera\>"
 syn match puppetFunction "\<hiera_array\>"
 syn match puppetFunction "\<hiera_hash\>"
-syn match puppetFunction "\<info\>"
+syn match puppetFunction "\<hocon_data\>"
+syn match puppetFunction "\<index\>"
 syn match puppetFunction "\<inline_epp\>"
-syn match puppetFunction "\<lest\>"
+syn match puppetFunction "\<inline_template\>"
+syn match puppetFunction "\<join\>"
+syn match puppetFunction "\<json_data\>"
+syn match puppetFunction "\<keys\>"
+syn match puppetFunction "\<length\>"
 syn match puppetFunction "\<lookup\>"
-syn match puppetFunction "\<map\>"
+syn match puppetFunction "\<lstrip\>"
 syn match puppetFunction "\<match\>"
+syn match puppetFunction "\<max\>"
+syn match puppetFunction "\<md5\>"
+syn match puppetFunction "\<min\>"
+syn match puppetFunction "\<module_directory\>"
 syn match puppetFunction "\<new\>"
-syn match puppetFunction "\<next\>"
-syn match puppetFunction "\<notice\>"
+syn match puppetFunction "\<partition\>"
 syn match puppetFunction "\<realize\>"
 syn match puppetFunction "\<reduce\>"
 syn match puppetFunction "\<regsubst\>"
-syn match puppetFunction "\<require\>"
-syn match puppetFunction "\<return\>"
-syn match puppetFunction "\<reverse_each\>"
+syn match puppetFunction "\<round\>"
+syn match puppetFunction "\<rstrip\>"
 syn match puppetFunction "\<scanf\>"
 syn match puppetFunction "\<sha1\>"
+syn match puppetFunction "\<sha256\>"
 syn match puppetFunction "\<shellquote\>"
+syn match puppetFunction "\<size\>"
 syn match puppetFunction "\<slice\>"
+syn match puppetFunction "\<sort\>"
 syn match puppetFunction "\<split\>"
 syn match puppetFunction "\<sprintf\>"
 syn match puppetFunction "\<step\>"
 syn match puppetFunction "\<strftime\>"
+syn match puppetFunction "\<strip\>"
 syn match puppetFunction "\<tag\>"
 syn match puppetFunction "\<tagged\>"
 syn match puppetFunction "\<template\>"
-syn match puppetFunction "\<then\>"
 syn match puppetFunction "\<type\>"
+syn match puppetFunction "\<unique\>"
 syn match puppetFunction "\<unwrap\>"
+syn match puppetFunction "\<upcase\>"
+syn match puppetFunction "\<values\>"
 syn match puppetFunction "\<versioncmp\>"
-syn match puppetFunction "\<warning\>"
 syn match puppetFunction "\<with\>"
+syn match puppetFunction "\<yaml_data\>"
 
 " deprecated Core functions
 syn match puppetDeprecated "\<import\>"
@@ -509,7 +555,8 @@ hi def link puppetVariable        puppetIdentifier
 hi def link puppetIdentifier      Identifier
 hi def link puppetInterpolationDelimiter Identifier
 hi def link puppetConditional     Conditional
-hi def link puppetControl         Statement
+hi def link puppetRepeat          Repeat
+hi def link puppetControl         Label
 hi def link puppetKeyword         Keyword
 hi def link puppetTodo            Todo
 hi def link puppetComment         Comment
@@ -517,6 +564,7 @@ hi def link puppetIncludeFunction Include
 hi def link puppetStdLibFunction  puppetFunction
 hi def link puppetFunction        Function
 hi def link puppetDeprecated      Ignore
+hi def link puppetDebug           Debug
 
 if g:puppet_display_errors ==# v:true
   hi def link puppetInvalidNumber   Error
