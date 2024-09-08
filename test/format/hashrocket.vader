@@ -18,6 +18,7 @@ Given puppet (simple resource with gq):
     # Short comment
   file { 'foo':
   ensure => present,
+  # mode     => '0700',
       force      =>     true,
   }
 
@@ -28,6 +29,7 @@ Expect puppet (formated resource):
   # Short comment
   file { 'foo':
     ensure => present,
+    # mode     => '0700',
     force  => true,
   }
 
