@@ -14,6 +14,10 @@ endif
 let s:cpo_sav = &cpo
 set cpo&vim
 
+if !exists('g:puppet_display_errors')
+  let g:puppet_display_errors = 1
+endif
+
 syn cluster puppetNotTop contains=@puppetExtendedStringSpecial,@puppetRegexpSpecial,puppetTodo
 
 syn match puppetSpaceError display excludenl "\s\+$"
@@ -282,7 +286,7 @@ hi def link puppetFunction        Function
 hi def link puppetDeprecated      Ignore
 hi def link puppetDebug           Debug
 
-if g:puppet_display_errors ==# v:true
+if g:puppet_display_errors
   hi def link puppetInvalidNumber   Error
   hi def link puppetNameBad         Error
   hi def link puppetSpaceError      Error
