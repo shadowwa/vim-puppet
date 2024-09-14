@@ -51,3 +51,32 @@ Execute (errors identified with syntax):
   AssertEqual 'puppetSpaceError', SyntaxAt(1,8), 'at beginning of array, exected: "puppetSpaceError" got: "'.SyntaxAt(1,8).'"'
   AssertEqual 'puppetSpaceError', SyntaxAt(2,8), 'at beginning of hash, exected: "puppetSpaceError" got: "'.SyntaxAt(2,8).'"'
   AssertEqual 'puppetSpaceError', SyntaxAt(2,16), 'after hash rocket, exected: "puppetSpaceError" got: "'.SyntaxAt(2,16).'"'
+
+--------------------------------------------------
+
+Given puppet (invalid resource names):
+  blah::Mooo { "name": }
+  blah::Mooo::hello { "name": }
+  if $this ~= Some::name { notice("this is sad") }
+  if $this ~= Some::name::Longer { notice("this is sad") }
+
+Execute (errors identified with syntax):
+  AssertEqual 'puppetInvalidName', SyntaxAt(1,1), '[blah]::Mooo, exected: "puppetInvalidName" got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(1,5), 'blah[::]Mooo, exected: "puppetInvalidName" got: "'.SyntaxAt(1,5).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(1,7), 'blah::[Mooo], exected: "puppetInvalidName" got: "'.SyntaxAt(1,7).'"'
+
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,1), '[blah]::Mooo::hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,1).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,5), 'blah[::]Mooo::hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,5).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,7), 'blah::[Mooo]::hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,7).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,11), 'blah::Mooo[::]hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,11).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,13), 'blah::Mooo::[hello], exected: "puppetInvalidName" got: "'.SyntaxAt(2,13).'"'
+
+  AssertEqual 'puppetInvalidName', SyntaxAt(3,13), '[Some]::name, exected: "puppetInvalidName" got: "'.SyntaxAt(3,13).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(3,17), 'Some[::]name, exected: "puppetInvalidName" got: "'.SyntaxAt(3,17).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(3,19), 'Some::[name], exected: "puppetInvalidName" got: "'.SyntaxAt(3,19).'"'
+
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,13), '[Some]::name::Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,13).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,17), 'Some[::]name::Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,17).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,19), 'Some::[name]::Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,19).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,23), 'Some::name[::]Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,23).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,25), 'Some::name::[Longer], exected: "puppetInvalidName" got: "'.SyntaxAt(4,25).'"'
