@@ -1,15 +1,19 @@
-Given puppet (simple resource with autoformat while writing):
+Given puppet (simple resource without hashrocket alignment):
   file { 'foo':
     ensure => present,
+    mode => '0700',
+    require => Package['this-and-that'],
   }
 
-Do (format resource):
+Do (autoformat resource while adding new parameter):
   joforce=>true,
 
 Expect puppet (formated resource):
   file { 'foo':
-    ensure => present,
-    force  => true,
+    ensure  => present,
+    force   => true,
+    mode    => '0700',
+    require => Package['this-and-that'],
   }
 
 -------------------------------------------------------------------------------
