@@ -1,0 +1,4 @@
+# conf
+<VirtualHost *:80>
+    ServerName example.com
+</VirtualHost>

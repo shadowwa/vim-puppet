@@ -1,11 +1,5 @@
-Given (simple Puppetfile):
-  forge "https://forgeapi.puppetlabs.com"
-  # comment
-  mod 'username-modulename', '1.2.3'
-
-Execute (trigger filetype detection):
-  file Puppetfile
-  edit
+Execute (Load Puppetfile):
+  edit test/test-files/Puppetfile
 
 Then (Detected Puppetfile as a ruby file):
   AssertEqual &filetype, 'ruby'

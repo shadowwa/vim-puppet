@@ -2,13 +2,32 @@ Execute (Filetype detection on a new empty file):
   edit foo.epp
   AssertEqual &filetype, 'epuppet'
 
-Given (epuppet file with leading tag):
-  <% if { %>
-  content
-
-Execute (trigger filetype detection):
-  file test_with_leading_tag.epp
-  edit
-
-Then (should be detected as epuppet):
+Execute (epuppet test_with_leading_tag):
+  edit test/test-files/test_with_leading_tag.epp
   AssertEqual &filetype, 'epuppet'
+
+Execute (TODO: epuppet perl with shebang):
+  edit test/test-files/test_perl_with_shebang.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'perl'
+
+# We don't need to parse the shebang for shell since sh is the default subtype
+Execute (epuppet default to shell):
+  edit test/test-files/test_shell_with_shebang.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'sh'
+
+Execute (epuppet shell with extension):
+  edit test/test-files/test_shell_with_extension.sh.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'sh'
+
+Execute (epuppet php with extension):
+  edit test/test-files/test_php_with_extension.php.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'php'
+
+Execute (TODO: epuppet apache conf with path and extension):
+  edit test/test-files/etc/apache2/test.conf.epp
+  AssertEqual &filetype, 'epuppet'
+  AssertEqual b:epuppet_subtype, 'apache'

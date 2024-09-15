@@ -1,0 +1,82 @@
+Given puppet (space errors in and around resource):
+   	file { 'something':  
+    hullo => 'gnah',
+    	name => 'notimportant',
+  	  mode => '0123',
+  }
+
+Execute (errors identified with syntax):
+  AssertEqual 'puppetSpaceError', SyntaxAt(1,22), 'at end of "file" line, exected: "puppetSpaceError" got: "'.SyntaxAt(1,22).'"'
+  " The spaces and the tab characters
+  AssertEqual 'puppetSpaceError', SyntaxAt(1,1), 'in front of "file", col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(1,2), 'in front of "file", col 2, exected: "puppetSpaceError" got: "'.SyntaxAt(1,2).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(3,1), 'in front of "name", col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(3,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(3,3), 'in front of "name", col 3, exected: "puppetSpaceError" got: "'.SyntaxAt(3,3).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(4,1), 'in front of "mode", col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(4,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(4,2), 'in front of "mode", col 2, exected: "puppetSpaceError" got: "'.SyntaxAt(4,2).'"'
+
+--------------------------------------------------
+
+Given puppet (space errors inside a class argument list and body, and around comments):
+  #   
+  	 # cromment
+  class filet ( 	
+    	$arg1,
+   	 $arg2,
+   	 # blah
+  ) {
+    	notice('something')
+  }
+
+Execute (errors identified with syntax):
+  AssertEqual 'puppetSpaceError', SyntaxAt(1,2), 'trailing spaces in comment first line, exected: "puppetSpaceError" got: "'.SyntaxAt(1,2).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(2,1), 'in front of comment second line, exected: "puppetSpaceError" got: "'.SyntaxAt(2,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(3,15), 'at end of "class" line, exected: "puppetSpaceError" got: "'.SyntaxAt(3,15).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(4,1), 'in front of "$arg1", col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(4,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(4,3), 'in front of "$arg1", col 3, exected: "puppetSpaceError" got: "'.SyntaxAt(4,3).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(5,1), 'in front of "$arg2", col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(5,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(5,2), 'in front of "$arg2", col 2, exected: "puppetSpaceError" got: "'.SyntaxAt(5,2).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(6,1), 'in front of comment, col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(6,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(6,2), 'in front of comment, col 2, exected: "puppetSpaceError" got: "'.SyntaxAt(6,2).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(8,1), 'in front of "notice(", col 1, exected: "puppetSpaceError" got: "'.SyntaxAt(8,1).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(8,3), 'in front of "notice(", col 3, exected: "puppetSpaceError" got: "'.SyntaxAt(8,3).'"'
+
+--------------------------------------------------
+
+Given puppet (space errors within brackets and braces):
+  $a = [ 	'1']
+  $b = { 	'aa' => 	3 }
+
+Execute (errors identified with syntax):
+  AssertEqual 'puppetSpaceError', SyntaxAt(1,8), 'at beginning of array, exected: "puppetSpaceError" got: "'.SyntaxAt(1,8).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(2,8), 'at beginning of hash, exected: "puppetSpaceError" got: "'.SyntaxAt(2,8).'"'
+  AssertEqual 'puppetSpaceError', SyntaxAt(2,16), 'after hash rocket, exected: "puppetSpaceError" got: "'.SyntaxAt(2,16).'"'
+
+--------------------------------------------------
+
+Given puppet (invalid resource names):
+  blah::Mooo { "name": }
+  blah::Mooo::hello { "name": }
+  if $this ~= Some::name { notice("this is sad") }
+  if $this ~= Some::name::Longer { notice("this is sad") }
+
+Execute (errors identified with syntax):
+  AssertEqual 'puppetInvalidName', SyntaxAt(1,1), '[blah]::Mooo, exected: "puppetInvalidName" got: "'.SyntaxAt(1,1).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(1,5), 'blah[::]Mooo, exected: "puppetInvalidName" got: "'.SyntaxAt(1,5).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(1,7), 'blah::[Mooo], exected: "puppetInvalidName" got: "'.SyntaxAt(1,7).'"'
+
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,1), '[blah]::Mooo::hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,1).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,5), 'blah[::]Mooo::hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,5).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,7), 'blah::[Mooo]::hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,7).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,11), 'blah::Mooo[::]hello, exected: "puppetInvalidName" got: "'.SyntaxAt(2,11).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(2,13), 'blah::Mooo::[hello], exected: "puppetInvalidName" got: "'.SyntaxAt(2,13).'"'
+
+  AssertEqual 'puppetInvalidName', SyntaxAt(3,13), '[Some]::name, exected: "puppetInvalidName" got: "'.SyntaxAt(3,13).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(3,17), 'Some[::]name, exected: "puppetInvalidName" got: "'.SyntaxAt(3,17).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(3,19), 'Some::[name], exected: "puppetInvalidName" got: "'.SyntaxAt(3,19).'"'
+
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,13), '[Some]::name::Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,13).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,17), 'Some[::]name::Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,17).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,19), 'Some::[name]::Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,19).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,23), 'Some::name[::]Longer, exected: "puppetInvalidName" got: "'.SyntaxAt(4,23).'"'
+  AssertEqual 'puppetInvalidName', SyntaxAt(4,25), 'Some::name::[Longer], exected: "puppetInvalidName" got: "'.SyntaxAt(4,25).'"'

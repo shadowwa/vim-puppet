@@ -14,15 +14,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      # There exists a vint github action but it can't install the alpha
+      # version. vint has not been moving since 2020 and we need to use the
+      # alpha release since it fixed some things wrt the latest stable release.
       - uses: actions/setup-python@v1
       - name: Install vint
         run: pip install --pre vim-vint
       - name: Lint vimscript files
         run: vint --warning --enable-neovim ./after ./autoload ./compiler ./ftdetect ./ftplugin ./indent ./syntax
-      - name: Install shellcheck
-        run: sudo apt-get -y install shellcheck
-      - name: Lint shell scripts
-        run: "shellcheck **/*.sh"
+      - uses: lunarmodules/luacheck@v1
+      - uses: ludeeus/action-shellcheck@master
 
   tests:
     runs-on: ubuntu-latest
@@ -30,23 +31,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #neovim: [false, true]
-        # When running vader tests in neovim under github's CI, it coredumps
-        neovim: [false]
+        editor: ["vim", "nvim"]
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup Vim or Neovim
+      - name: Setup ${{ matrix.editor }}
         uses: rhysd/action-setup-vim@v1
         id: vim
         with:
-          neovim: ${{ matrix.neovim }}
+          neovim: ${{ matrix.editor == 'nvim' }}
       - name: Run Vader unit tests
         run: |
-          if [ "${{ matrix.neovim }}" = "true" ]; then
-            TESTVIM=nvim
-          else
-            TESTVIM=vim
-          fi
+          TESTVIM=${{ matrix.editor }}
           export TESTVIM
           ./test/run-tests.sh

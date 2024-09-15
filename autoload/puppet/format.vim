@@ -1,16 +1,20 @@
 "
 " Simple format using puppet's l:indents and align hashrockets function
 function! puppet#format#Format() abort
+  " only allow reformatting through the gq command
+  " (e.g. Vim is in normal mode)
+  if mode() !=# 'n'
+    " do not fall back to internal formatting
+    return 0
+  endif
+
   let l:start_lnum = v:lnum
   let l:end_lnum = v:lnum + v:count - 1
-  " Don't modify indentation or alignment if called by textwidth. We'll only
-  " let the fallback function do its thing in this case so that textwidth
-  " still performs the expected feature.
-  if mode() !~# '[iR]'
-    call puppet#format#Indention(l:start_lnum, l:end_lnum)
-    call puppet#format#Hashrocket(l:start_lnum, l:end_lnum)
-  endif
+
+  call puppet#format#Indention(l:start_lnum, l:end_lnum)
+  call puppet#format#Hashrocket(l:start_lnum, l:end_lnum)
   call puppet#format#Fallback(l:start_lnum, l:end_lnum)
+
   " explicitly avoid falling back to default formatting
   return 0
 endfunction
@@ -19,12 +23,20 @@ endfunction
 " Format hashrockets expressions in every line in range start_lnum and
 " end_lnum, both ends included
 "
-" TODO way of using AlignHashrockets function is ineffective, because it
-" formats same lines again and again, find better way to do it
 function! puppet#format#Hashrocket(start_lnum, end_lnum) abort
   let l:lnum = a:start_lnum
+  let processed_lines = []
   while l:lnum <= a:end_lnum
-    call puppet#align#AlignHashrockets(l:lnum)
+    if index(processed_lines, l:lnum) ==# -1
+      let line_text = getline(l:lnum)
+      if line_text =~? '\v\S'
+        let processed_lines += puppet#align#AlignHashrockets(l:lnum)
+      else
+        " empty lines make puppet#align#AlignHashrockets reprocess blocks with
+        " indentation that were already processed so we just skip them
+        call add(processed_lines, l:lnum)
+      endif
+    endif
     let l:lnum += 1
   endwhile
 endfunction

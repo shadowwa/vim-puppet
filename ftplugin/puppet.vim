@@ -20,11 +20,10 @@ setlocal commentstring=#\ %s
 " full resource name, however since : is used in many non-keyword contexts it
 " is a bad idea to add it to the option.
 
-setlocal formatoptions-=t formatoptions+=croql
 setlocal formatexpr=puppet#format#Format()
 
 let b:undo_ftplugin = '
     \ setlocal tabstop< tabstop< softtabstop< shiftwidth< expandtab<
     \| setlocal keywordprg< iskeyword< comments< commentstring<
-    \| setlocal formatoptions< formatexpr<
+    \| setlocal formatexpr<
     \'
