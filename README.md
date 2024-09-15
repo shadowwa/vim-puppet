@@ -17,6 +17,9 @@ Provides
 * Automatic => alignment
   * If you don't like that, add `let g:puppet_align_hashes = 0` to your vimrc.
 * Ctags support
+  * gutentags integration
+    * You can enable loading tags with gutentags by setting
+      `g:gutentags_dont_load = 1` in your vimrc
 * Doesn't require a bloated JRE
 * Doesn't take minutes to open
 
