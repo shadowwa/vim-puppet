@@ -13,11 +13,13 @@ jobs:
     name: Lint code with Vint and shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       # There exists a vint github action but it can't install the alpha
       # version. vint has not been moving since 2020 and we need to use the
       # alpha release since it fixed some things wrt the latest stable release.
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
       - name: Install vint
         run: pip install --pre vim-vint
       - name: Lint vimscript files
@@ -34,7 +36,7 @@ jobs:
         editor: ["vim", "nvim"]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup ${{ matrix.editor }}
         uses: rhysd/action-setup-vim@v1
         id: vim
